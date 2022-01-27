@@ -28,10 +28,19 @@ vim.cmd [[
     autocmd!
     autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
   augroup end
+
+  " Autoformat
+  augroup _lsp
+    autocmd!
+    " autocmd BufWritePre * lua vim.lsp.buf.formatting()
+    autocmd BufWritePre * lua vim.lsp.buf.formatting_seq_sync()
+  augroup end
+
+  augroup remember_folds
+    autocmd!
+    autocmd BufWinLeave ?* mkview 1
+    autocmd BufWinEnter ?* silent! loadview 1
+  augroup END
 ]]
 
--- Autoformat
--- augroup _lsp
---   autocmd!
---   autocmd BufWritePre * lua vim.lsp.buf.formatting()
--- augroup end
+
